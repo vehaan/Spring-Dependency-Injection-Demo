@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xmlns:lang="http://www.springframework.org/schema/lang"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:task="http://www.springframework.org/schema/task"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.3.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd">
+        
+        
+        <bean id="address1" class="com.cg.bean.Address">
+        	<property name="pinCode"><value>434343</value></property>
+        	<property name="state"><value>Maharashtra</value></property>
+        	<property name="city"><value>Pune</value></property>
+        </bean>
+        
+         <bean id="address2" class="com.cg.bean.Address">
+        	<property name="pinCode"><value>434343</value></property>
+        	<property name="state"><value>Maharashtra</value></property>
+        	<property name="city"><value>Pune</value></property>
+        </bean>
+        
+         <bean id="address3" class="com.cg.bean.Address">
+        	<property name="pinCode"><value>434343</value></property>
+        	<property name="state"><value>Maharashtra</value></property>
+        	<property name="city"><value>Pune</value></property>
+        </bean>
+        
+        <bean id="department" class="com.cg.bean.Department">
+        	<constructor-arg><value>9999</value></constructor-arg>
+        	<constructor-arg><value>Sales</value></constructor-arg>
+        	<constructor-arg><value>Mumbai</value></constructor-arg>
+        </bean>
+        
+        
+<!--         For Stereotype Annotation comment the below employee beans -->
+        <bean id="employee" class="com.cg.bean.Employee" scope = "prototype">
+        	<constructor-arg><value>1111</value></constructor-arg>
+        	<constructor-arg><value>Mitali</value></constructor-arg>
+        	<constructor-arg><ref bean="department"/></constructor-arg>
+        	<constructor-arg>
+        		<list>
+        			<ref bean="address1"/>
+        			<ref bean="address2"/>
+        			<ref bean="address3"/>
+        		</list>
+        	</constructor-arg>
+        </bean>
+        
+       	<bean id="emp2" class="com.cg.bean.Employee" autowire="byName">
+        	<property name="id"><value>101</value></property>
+        	<property name="empName"><value>Sheena</value></property>
+        </bean>
+        
+        <context:component-scan base-package="com.cg.bean"></context:component-scan>
+        
+<!--         This below block is for username password day1 -->
+        <bean id="user" class="com.cg.day1.User">
+        <property name="username"><value>${username}</value></property>
+        <property name="password"><value>${password}</value></property>
+    </bean>
+
+    <bean id="placeHolderConfig"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location"><value>user.properties</value></property>
+    </bean>
+</beans>
+
